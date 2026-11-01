@@ -96,6 +96,9 @@
             border-radius: 99px;
             transition: all 0.2s ease;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .links a:hover { color: var(--fg); background: rgba(150,150,150,0.08); }
         .sp { flex: 1; }
@@ -175,7 +178,7 @@
         }
         .hero p { color: var(--mut); font-size: clamp(15px, 1.8vw, 19px); max-width: 56ch; margin: 0 auto 24px; font-weight: 400; line-height: 1.5; }
 
-        /* Carousel Section: Pinned/Liked Articles Only */
+        /* Carousel Section */
         .arc-wrap { max-width: 1180px; margin: 30px auto 0; padding: 0 20px; position: relative; }
         .arc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .arc { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 12px 4px 24px; -webkit-overflow-scrolling: touch; }
@@ -210,7 +213,7 @@
         .ac b { font-size: 18px; line-height: 1.3; letter-spacing: -.02em; font-weight: 700; margin-top: auto; display: block; }
         .ac-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 12px; opacity: 0.9; color: #cbd5e1; }
 
-        /* Bento Grid Section for All Articles */
+        /* Bento Grid Section */
         .sec { max-width: 1180px; margin: 0 auto; padding: 48px 20px; }
         .big { font-size: clamp(30px, 4vw, 52px); letter-spacing: -.04em; line-height: 1.08; font-weight: 800; margin: 0 0 24px; max-width: 22ch; }
         .big i { font-style: normal; color: var(--mut); font-weight: 400; }
@@ -275,10 +278,10 @@
         .fg a:hover { color: var(--or); }
         .fg p { color: #94a3b8; font-size: 14px; margin: 12px 0 0; line-height: 1.6; }
 
-        .social-icons { display: flex; gap: 12px; margin-top: 18px; }
-        .social-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #26262a; color: #cbd5e1; transition: all 0.2s ease; }
-        .social-btn:hover { background: var(--or); color: #fff; transform: translateY(-2px); }
-        .social-btn i { font-size: 16px; }
+        .social-icons { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+        .social-btn { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: #26262a; color: #cbd5e1; transition: all 0.2s ease; text-decoration: none; border: 1px solid rgba(255,255,255,0.05); }
+        .social-btn:hover { background: var(--or); color: #fff; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(255, 106, 26, 0.4); }
+        .social-btn i { font-size: 18px; }
 
         .fb { max-width: 1180px; margin: 40px auto 0; padding: 24px 20px 0; border-top: 1px solid #26262a; color: #64748b; font-size: 13.5px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
@@ -294,6 +297,7 @@
         .post-body ul { list-style-type: disc; padding-left: 24px; margin-bottom: 20px; }
         .post-body li { margin-bottom: 8px; }
         .post-body a { color: var(--or); text-decoration: underline; }
+        .post-body img { max-width: 100%; height: auto; border-radius: 16px; margin: 16px 0; display: block; }
         
         mark.hl-yellow { background-color: #fef08a; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
         mark.hl-orange { background-color: #ffedd5; color: #9a3412; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
@@ -304,6 +308,32 @@
         .tb-btn:hover { border-color: var(--or); color: var(--or); }
         .editor-box { min-height: 220px; max-height: 480px; overflow-y: auto; padding: 16px; border: 1px solid var(--ln); border-radius: 0 0 16px 16px; background: var(--bg); color: var(--fg); outline: none; }
         .editor-box:focus { border-color: var(--or); }
+        .editor-box img { max-width: 100%; border-radius: 12px; margin: 12px 0; display: block; }
+
+        /* Specific styles for Intake and Support pages */
+        .info-card { background: var(--cd); border: 1px solid var(--ln); border-radius: 20px; padding: 24px; margin-bottom: 20px; }
+        .info-card h3 { font-size: 18px; font-weight: 700; margin: 0 0 12px; color: var(--or); display: flex; align-items: center; gap: 10px; }
+        .action-btns-wrap { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; justify-content: center; }
+
+        /* Custom Notification Toast */
+        #custom-toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--fg);
+            color: var(--bg);
+            padding: 14px 24px;
+            border-radius: 99px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 100;
+            font-weight: 600;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         @media(max-width: 1024px) {
             .bento-card, .bento-card.wide, .bento-card.tall { grid-column: span 6; }
@@ -316,6 +346,8 @@
         @media(max-width: 640px) {
             .bento-card, .bento-card.wide, .bento-card.tall { grid-column: span 12; }
             .fg { grid-template-columns: 1fr; }
+            .action-btns-wrap { flex-direction: column; }
+            .action-btns-wrap .btn { width: 100%; }
         }
     </style>
 </head>
@@ -324,14 +356,14 @@
         <nav class="pill">
             <a class="brand" onclick="go('home')">EzAssign <span class="bl">Blog</span></a>
             <div class="links">
-                <a onclick="toSec('art')">Articles</a>
-                <a onclick="go('uk-jan-2027-intake')">Jan 2027 Intake</a>
-                <a onclick="toSec('faq')">FAQ</a>
-                <a onclick="toSec('footer')">Support</a>
+                <a onclick="toSec('art')"><i class="fa-regular fa-newspaper"></i> Articles</a>
+                <a onclick="go('uk-jan-2027-intake')"><i class="fa-solid fa-graduation-cap"></i> Jan 2027 Intake</a>
+                <a onclick="toSec('faq')"><i class="fa-regular fa-circle-question"></i> FAQ</a>
+                <a onclick="go('support')"><i class="fa-solid fa-headset"></i> Support</a>
             </div>
             <span class="sp"></span>
             <button class="btn" id="th" onclick="toggleTheme()" title="Toggle Theme">🌓 Mode</button>
-            <button class="btn mb" onclick="toggleMenu()">Menu</button>
+            <button class="btn mb" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i> Menu</button>
         </nav>
         <div id="mm"></div>
     </header>
@@ -346,10 +378,10 @@
                 <a class="brand" onclick="go('home')">EzAssign <span class="bl">Blog</span></a>
                 <p>Your trusted academic advisory platform for study abroad applications, UK university intakes, visa guidance, and assignment assistance.</p>
                 <div class="social-icons">
-                    <a class="social-btn" href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a class="social-btn" href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a class="social-btn" href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a class="social-btn" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a class="social-btn" href="https://www.instagram.com/ezassign" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a class="social-btn" href="https://www.linkedin.com/company/ezassign/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a class="social-btn" href="https://ezassign.uk/" target="_blank" title="Academic Help Website"><i class="fa-solid fa-globe"></i></a>
+                    <a class="social-btn" href="https://www.youtube.com/@ezassign" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
             <div>
@@ -361,21 +393,21 @@
             </div>
             <div>
                 <h4>Intakes</h4>
-                <a onclick="go('uk-jan-2027-intake')">January 2027</a>
+                <a onclick="go('uk-jan-2027-intake')">January 2027 Intake</a>
                 <a onclick="go('home')">September 2026</a>
                 <a onclick="go('home')">May 2026</a>
             </div>
             <div>
                 <h4>Author Platform</h4>
-                <!-- EXCLUSIVE WRITE / PUBLISH ARTICLE LINK PLACEMENT -->
                 <a onclick="go('publish')" style="color:var(--or);font-weight:700;"><i class="fa-solid fa-pen-to-square"></i> Author Desk / Publish Article</a>
                 <a onclick="go('home')">Editorial Policy</a>
                 <a onclick="go('home')">Privacy Policy</a>
             </div>
             <div>
                 <h4>Support</h4>
+                <a onclick="go('support')"><i class="fa-solid fa-headset"></i> Request Call Back</a>
                 <a onclick="toSec('faq')">Help Center &amp; FAQ</a>
-                <a onclick="go('home')">Contact Advisory</a>
+                <a onclick="go('support')">Contact Advisory</a>
                 <a onclick="go('home')">Student Community</a>
             </div>
         </div>
@@ -385,11 +417,14 @@
         </div>
     </footer>
 
+    <!-- Custom Toast Alert Banner -->
+    <div id="custom-toast"></div>
+
     <script>
-        // Initial Database Store (With Pinned Flag, Timestamps, and Reading Times)
+        // Initial Database Store
         const INITIAL_ARTICLES = [
             {
-                id: 'uk-jan-2027-intake',
+                id: 'uk-jan-2027-intake-guide',
                 title: 'UK January 2027 Intake: Deadlines, Courses & How to Apply',
                 category: 'Admissions',
                 author: 'EzAssign Editorial Team',
@@ -469,7 +504,7 @@
             }
         ];
 
-        // 10+ FAQ Data List
+        // FAQ Data List
         const FAQ_DATA = [
             {
                 q: "Tell me more about EzAssign",
@@ -502,64 +537,58 @@
             {
                 q: "How fast can EzAssign deliver urgent assignment assistance?",
                 a: "Our team of academic writers can accommodate urgent requests ranging from 24-hour turnarounds to multi-week thesis consultations, ensuring strict adherence to your specified university rubric."
-            },
-            {
-                q: "Can I get assistance with UK Student Visa financial proof?",
-                a: "Yes! EzAssign provides detailed breakdowns of UK Visas and Immigration (UKVI) financial requirements, including exact maintenance fund amounts for Inner vs Outer London and the strict 28-day bank statement holding rule."
-            },
-            {
-                q: "How do I contact EzAssign advisors directly?",
-                a: "You can reach out to our advisory team 24/7 via the Support link in the footer or email us at support@ezassign.com for instant guidance."
             }
         ];
 
-        // State Management
-        let articles = JSON.parse(localStorage.getItem('ez_articles')) || INITIAL_ARTICLES;
-        let activeCategory = 'All';
+        // Application State
+        let articles = [...INITIAL_ARTICLES];
+        let currentFilter = 'All';
         let searchQuery = '';
-        let uploadedImageData = null;
+        let currentRoute = 'home';
+        let currentArticleId = null;
 
-        function saveArticlesToStorage() {
-            localStorage.setItem('ez_articles', JSON.stringify(articles));
-        }
-
-        // Router Navigation
-        function go(pageId) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            closeMenu();
-            if (pageId === 'home') {
-                renderHome();
-            } else if (pageId === 'publish') {
-                renderPublishForm();
-            } else {
-                const article = articles.find(a => a.id === pageId);
-                if (article) {
-                    renderArticleDetail(article);
-                } else {
-                    renderHome();
-                }
-            }
-        }
-
-        function toSec(id) {
-            go('home');
+        // Custom Notification Function
+        function showToast(message) {
+            const toast = document.getElementById('custom-toast');
+            toast.innerText = message;
+            toast.style.display = 'block';
             setTimeout(() => {
-                const el = document.getElementById(id);
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Routing System
+        function go(route, param = null) {
+            currentRoute = route;
+            if (route === 'article') {
+                currentArticleId = param;
+            }
+            closeMenu();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        function toSec(secId) {
+            if (currentRoute !== 'home') {
+                currentRoute = 'home';
+                render();
+                setTimeout(() => {
+                    const el = document.getElementById(secId);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            } else {
+                const el = document.getElementById(secId);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+            }
+            closeMenu();
         }
 
-        function filterCat(cat) {
-            activeCategory = cat;
-            toSec('art');
-        }
-
-        // Dark/Light Theme Switcher
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            document.getElementById('th').innerHTML = newTheme === 'dark' ? '☀️ Light' : '🌓 Dark';
+            const html = document.documentElement;
+            const cur = html.getAttribute('data-theme');
+            const next = cur === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            document.getElementById('th').innerHTML = next === 'dark' ? '☀️ Mode' : '🌓 Mode';
         }
 
         function toggleMenu() {
@@ -569,166 +598,263 @@
             } else {
                 mm.innerHTML = `
                     <div class="mp">
-                        <a onclick="go('home')">Home</a>
-                        <a onclick="toSec('art')">Articles</a>
-                        <a onclick="go('uk-jan-2027-intake')">Jan 2027 Intake</a>
-                        <a onclick="go('publish')" style="color:var(--or);">+ Publish Article</a>
-                        <a onclick="toSec('faq')">FAQ</a>
-                        <a onclick="toSec('footer')">Support</a>
+                        <a onclick="toSec('art')"><i class="fa-regular fa-newspaper"></i> Articles</a>
+                        <a onclick="go('uk-jan-2027-intake')"><i class="fa-solid fa-graduation-cap"></i> Jan 2027 Intake</a>
+                        <a onclick="toSec('faq')"><i class="fa-regular fa-circle-question"></i> FAQ</a>
+                        <a onclick="go('support')"><i class="fa-solid fa-headset"></i> Support</a>
+                        <a onclick="go('publish')" style="color:var(--or)"><i class="fa-solid fa-pen-to-square"></i> Publish Article</a>
                     </div>
                 `;
             }
         }
 
         function closeMenu() {
-            const mm = document.getElementById('mm');
-            if (mm) mm.innerHTML = '';
+            document.getElementById('mm').innerHTML = '';
         }
 
-        // Render Home Page
-        function renderHome() {
-            const filtered = articles.filter(a => {
-                const matchesCat = activeCategory === 'All' || a.category === activeCategory;
-                const matchesSearch = a.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      a.desc.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchesCat && matchesSearch;
-            });
+        function filterCat(cat) {
+            currentFilter = cat;
+            if (currentRoute !== 'home') {
+                currentRoute = 'home';
+                render();
+            } else {
+                renderArticlesGrid();
+                updateChips();
+            }
+        }
 
+        function handleSearch(e) {
+            searchQuery = e.target.value.toLowerCase();
+            renderArticlesGrid();
+        }
+
+        function toggleFaq(index) {
+            const el = document.getElementById(`faq-${index}`);
+            if (el) {
+                el.classList.toggle('open');
+            }
+        }
+
+        function execEditorCmd(cmd, arg = null) {
+            document.execCommand(cmd, false, arg);
+        }
+
+        // Attach Cover Page Photo from Gallery
+        function attachCoverPhoto() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        document.getElementById('new-img').value = event.target.result;
+                        const previewEl = document.getElementById('cover-preview');
+                        if (previewEl) {
+                            previewEl.style.backgroundImage = `url('${event.target.result}')`;
+                            previewEl.style.display = 'block';
+                        }
+                        showToast('Cover photo attached successfully!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        // Attach Editor Photo from Gallery
+        function attachPhotoFromGallery() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const imgHtml = `<br><img src="${event.target.result}" alt="Uploaded photo" /><br>`;
+                        document.execCommand('insertHTML', false, imgHtml);
+                        showToast('Photo attached to body successfully!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        function publishNewArticle(e) {
+            e.preventDefault();
+            const title = document.getElementById('new-title').value;
+            const category = document.getElementById('new-cat').value;
+            const author = document.getElementById('new-author').value;
+            const readTime = document.getElementById('new-readtime').value;
+            const img = document.getElementById('new-img').value || 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200&auto=format&fit=crop';
+            const desc = document.getElementById('new-desc').value;
+            const content = document.getElementById('new-content').innerHTML;
+
+            const newPost = {
+                id: 'post-' + Date.now(),
+                title,
+                category,
+                author: author || 'Guest Author',
+                date: 'Just Now',
+                timestamp: Date.now(),
+                readTime: readTime || '5 min read',
+                isPinned: false,
+                likes: 1,
+                img,
+                desc,
+                content
+            };
+
+            articles.unshift(newPost);
+            showToast('Article Published Successfully!');
+            go('home');
+        }
+
+        // View Renderers
+        function render() {
+            const app = document.getElementById('app');
+            if (currentRoute === 'home') {
+                app.innerHTML = renderHomeHTML();
+                renderArticlesGrid();
+            } else if (currentRoute === 'article') {
+                app.innerHTML = renderArticleHTML(currentArticleId);
+            } else if (currentRoute === 'uk-jan-2027-intake') {
+                app.innerHTML = renderIntakeHTML();
+            } else if (currentRoute === 'support') {
+                app.innerHTML = renderSupportHTML();
+            } else if (currentRoute === 'publish') {
+                app.innerHTML = renderPublishHTML();
+            }
+        }
+
+        function renderHomeHTML() {
             const pinnedArticles = articles.filter(a => a.isPinned);
-
-            const categories = ['All', 'Admissions', 'Universities', 'Visa', 'Careers', 'Finance'];
-
-            let html = `
+            
+            return `
                 <section class="hero">
-                    <div class="badge" onclick="go('uk-jan-2027-intake')">
-                        <span class="dot"></span> Applications Open for January 2027 Intake
-                    </div>
-                    <h1>Master Your Study Abroad Journey</h1>
-                    <p>Expert university guides, visa procedures, assignment support, and intake timelines for international students in the UK and worldwide.</p>
+                    <div class="badge" onclick="go('uk-jan-2027-intake')"><span class="dot"></span> UK January 2027 Intake Advisory Open</div>
+                    <h1>Your Gateway to UK Higher Education</h1>
+                    <p>Expert guides, application timelines, scholarship strategies, and academic writing support designed specifically for international students.</p>
                 </section>
 
-                <!-- Pinned Carousel -->
-                <section class="arc-wrap">
+                <div class="arc-wrap">
                     <div class="arc-header">
-                        <div class="lbl">Featured Guides</div>
+                        <span class="lbl"><i class="fa-solid fa-thumbtack"></i> Featured &amp; Pinned Guides</span>
                     </div>
                     <div class="arc">
                         ${pinnedArticles.map(a => `
-                            <div class="ac" style="background-image: url('${a.img}')" onclick="go('${a.id}')">
-                                <span class="pin-tag"><i class="fa-solid fa-thumbtack"></i> Pinned</span>
+                            <div class="ac" style="background-image: url('${a.img}')" onclick="go('article', '${a.id}')">
+                                <span class="pin-tag"><i class="fa-solid fa-star"></i> Featured</span>
                                 <div>
                                     <b>${a.title}</b>
                                     <div class="ac-meta">
                                         <span>${a.readTime}</span>
-                                        <span><i class="fa-solid fa-heart" style="color:var(--or)"></i> ${a.likes}</span>
+                                        <span><i class="fa-regular fa-heart"></i> ${a.likes}</span>
                                     </div>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
-                </section>
+                </div>
 
-                <!-- Articles Grid Section -->
                 <section class="sec" id="art">
                     <div class="bar">
                         <h2>Explore Articles</h2>
-                        <input type="text" class="in" placeholder="Search guides, visas, courses..." value="${searchQuery}" oninput="handleSearch(this.value)">
+                        <input class="in" type="text" placeholder="Search guides, visas..." oninput="handleSearch(event)" value="${searchQuery}" />
                     </div>
 
-                    <div class="chips">
-                        ${categories.map(c => `
-                            <button class="chip ${activeCategory === c ? 'on' : ''}" onclick="setCategory('${c}')">${c}</button>
-                        `).join('')}
+                    <div class="chips" id="chips-wrap">
+                        <!-- Rendered via JS updateChips -->
                     </div>
 
-                    <div class="bento-grid">
-                        ${filtered.length > 0 ? filtered.map((a, index) => {
-                            const isWide = index % 5 === 0 ? 'wide' : '';
-                            return `
-                                <div class="bento-card ${isWide}" onclick="go('${a.id}')">
-                                    <div class="cv" style="background-image: url('${a.img}')">
-                                        <em>${a.category}</em>
-                                        <span class="meta" style="color:#fff;"><i class="fa-regular fa-clock"></i> ${a.readTime}</span>
-                                    </div>
-                                    <div class="cb">
-                                        <div class="cat"><i class="fa-solid fa-bookmark"></i> ${a.author}</div>
-                                        <h3>${a.title}</h3>
-                                        <p>${a.desc}</p>
-                                        <div class="row">
-                                            <span class="meta">${a.date}</span>
-                                            <button class="btn sm" onclick="event.stopPropagation(); likePost('${a.id}')"><i class="fa-solid fa-heart" style="color:var(--or)"></i> ${a.likes}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('') : `
-                            <div style="grid-column: span 12; text-align: center; padding: 48px; color: var(--mut);">
-                                <i class="fa-solid fa-magnifying-glass" style="font-size: 32px; margin-bottom: 12px;"></i>
-                                <p>No articles found matching your criteria.</p>
-                            </div>
-                        `}
+                    <div class="bento-grid" id="grid-wrap">
+                        <!-- Rendered via JS -->
                     </div>
                 </section>
 
-                <!-- Accordion FAQ Section -->
                 <section class="sec" id="faq">
-                    <div class="lbl">Got Questions?</div>
-                    <h2 class="big">Frequently Asked <i>Questions</i></h2>
+                    <div class="lbl"><i class="fa-solid fa-circle-question"></i> Help Center</div>
+                    <h2 class="big">Frequently Asked Questions <i>&amp; Answers</i></h2>
                     <div class="faq-list">
-                        ${FAQ_DATA.map((f, i) => `
-                            <div class="faq-item" id="faq-${i}">
-                                <div class="faq-question" onclick="toggleFaq(${i})">
-                                    <span>${f.q}</span>
+                        ${FAQ_DATA.map((item, idx) => `
+                            <div class="faq-item" id="faq-${idx}">
+                                <div class="faq-question" onclick="toggleFaq(${idx})">
+                                    <span>${item.q}</span>
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>${f.a}</p>
+                                    ${item.a}
                                 </div>
                             </div>
                         `).join('')}
                     </div>
                 </section>
             `;
-
-            document.getElementById('app').innerHTML = html;
         }
 
-        function setCategory(cat) {
-            activeCategory = cat;
-            renderHome();
+        function updateChips() {
+            const categories = ['All', 'Admissions', 'Universities', 'Visa', 'Careers', 'Finance'];
+            const wrap = document.getElementById('chips-wrap');
+            if (!wrap) return;
+            wrap.innerHTML = categories.map(c => `
+                <button class="chip ${currentFilter === c ? 'on' : ''}" onclick="filterCat('${c}')">${c}</button>
+            `).join('');
         }
 
-        function handleSearch(val) {
-            searchQuery = val;
-            renderHome();
-        }
+        function renderArticlesGrid() {
+            updateChips();
+            const wrap = document.getElementById('grid-wrap');
+            if (!wrap) return;
 
-        function toggleFaq(index) {
-            const item = document.getElementById(`faq-${index}`);
-            if (item) item.classList.toggle('open');
-        }
+            let list = articles.filter(a => {
+                const matchesCat = currentFilter === 'All' || a.category === currentFilter;
+                const matchesQuery = a.title.toLowerCase().includes(searchQuery) || a.desc.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesQuery;
+            });
 
-        function likePost(id) {
-            const article = articles.find(a => a.id === id);
-            if (article) {
-                article.likes += 1;
-                saveArticlesToStorage();
-                renderHome();
+            if (list.length === 0) {
+                wrap.innerHTML = `<div style="grid-column: span 12; text-align: center; padding: 40px; color: var(--mut);">No articles found matching your criteria.</div>`;
+                return;
             }
+
+            wrap.innerHTML = list.map((a, index) => {
+                let cardClass = "bento-card";
+                if (index === 0) cardClass += " wide";
+                
+                return `
+                    <div class="${cardClass}" onclick="go('article', '${a.id}')">
+                        <div class="cv" style="background-image: url('${a.img}')">
+                            <em>${a.category}</em>
+                        </div>
+                        <div class="cb">
+                            <span class="cat"><i class="fa-regular fa-clock"></i> ${a.readTime}</span>
+                            <h3>${a.title}</h3>
+                            <p>${a.desc}</p>
+                            <div class="row meta">
+                                <span>${a.author}</span>
+                                <span>${a.date}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
-        // Render Article Detail View
-        function renderArticleDetail(article) {
-            let html = `
+        function renderArticleHTML(id) {
+            const article = articles.find(a => a.id === id) || articles[0];
+            return `
                 <article class="post">
-                    <button class="btn sm" onclick="go('home')" style="margin-bottom: 16px;"><i class="fa-solid fa-arrow-left"></i> Back to Articles</button>
+                    <button class="btn sm" onclick="go('home')" style="margin-bottom: 20px;"><i class="fa-solid fa-arrow-left"></i> Back to Articles</button>
                     
-                    <div class="ph" style="background-image: url('${article.img}');">
-                        <span class="badge" style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.3); color:#fff;">${article.category}</span>
+                    <div class="ph" style="background-image: url('${article.img}')">
+                        <span class="pin-tag">${article.category}</span>
                         <h1>${article.title}</h1>
-                        <div class="row" style="font-size: 14px; opacity: 0.9;">
-                            <span>By <strong>${article.author}</strong> • ${article.date}</span>
-                            <span>${article.readTime}</span>
+                        <div class="ac-meta" style="font-size: 14px;">
+                            <span>By ${article.author} • ${article.date}</span>
+                            <span><i class="fa-regular fa-clock"></i> ${article.readTime}</span>
                         </div>
                     </div>
 
@@ -737,163 +863,124 @@
                     </div>
 
                     <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--ln); display: flex; justify-content: space-between; align-items: center;">
-                        <button class="btn or" onclick="likePost('${article.id}')"><i class="fa-solid fa-heart"></i> Like (${article.likes})</button>
-                        <button class="btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Article link copied to clipboard!');"><i class="fa-solid fa-share-nodes"></i> Share Article</button>
+                        <button class="btn" onclick="showToast('Thank you for liking this article!')"><i class="fa-solid fa-thumbs-up"></i> Helpful (${article.likes})</button>
+                        <button class="btn or" onclick="go('support')">Need Help With Applications? Contact Us</button>
                     </div>
                 </article>
             `;
-
-            document.getElementById('app').innerHTML = html;
         }
 
-        // Render Author Desk / Publisher View
-        function renderPublishForm() {
-            uploadedImageData = null;
-            let html = `
-                <section class="sec" style="max-width: 800px;">
-                    <button class="btn sm" onclick="go('home')" style="margin-bottom: 16px;"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
-                    <div class="lbl">Author Platform</div>
-                    <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 24px;">Publish New Article</h2>
-                    
-                    <form onsubmit="handlePublish(event)" style="display: flex; flex-direction: column; gap: 16px;">
-                        <div>
-                            <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">Article Title</label>
-                            <input type="text" id="p-title" class="in" placeholder="e.g. Guide to UK University Scholarships 2027" required>
-                        </div>
+        function renderIntakeHTML() {
+            return `
+                <section class="sec">
+                    <div class="lbl"><i class="fa-solid fa-graduation-cap"></i> Admission Portal</div>
+                    <h1 class="big">UK January 2027 Intake <i>Complete Guide</i></h1>
+                    <p style="color:var(--mut); font-size:18px; max-width:65ch; margin-bottom:32px;">The January intake is one of the biggest opportunities for international students targeting UK master's degrees and undergraduate foundation programs.</p>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                            <div>
-                                <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">Category</label>
-                                <select id="p-cat" class="in" required>
-                                    <option value="Admissions">Admissions</option>
-                                    <option value="Universities">Universities</option>
-                                    <option value="Visa">Visa & Immigration</option>
-                                    <option value="Careers">Careers</option>
-                                    <option value="Finance">Scholarships & Finance</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">Author Name</label>
-                                <input type="text" id="p-author" class="in" placeholder="Your Name or Team" required>
-                            </div>
-                        </div>
+                    <div class="info-card">
+                        <h3><i class="fa-solid fa-calendar-check"></i> Key Intake Timelines</h3>
+                        <p><strong>Applications Open:</strong> May 2026 – July 2026</p>
+                        <p><strong>Offer Letter Processing:</strong> 2 to 4 weeks after submission</p>
+                        <p><strong>CAS Request Deadline:</strong> Mid-November 2026</p>
+                        <p><strong>Visa Filing Window:</strong> October – December 2026</p>
+                    </div>
 
-                        <div>
-                            <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">Short Summary</label>
-                            <textarea id="p-desc" class="in" rows="2" placeholder="Brief 2-3 sentence overview..." required></textarea>
-                        </div>
+                    <div class="info-card">
+                        <h3><i class="fa-solid fa-building-columns"></i> Popular Participating Universities</h3>
+                        <p>Top universities offering extensive course choices for January 2027 include Coventry University, University of Greenwich, Northumbria University, University of Hertfordshire, and BPP University.</p>
+                    </div>
 
-                        <div>
-                            <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">Cover Image</label>
-                            <input type="url" id="p-img" class="in" placeholder="Enter image URL (https://...)" onchange="clearFileUpload()">
-                            <div style="text-align: center; margin: 4px 0; color: var(--mut); font-size: 12px;">OR</div>
-                            <input type="file" id="p-file" class="in" accept="image/*" onchange="handleFileUpload(event)">
-                        </div>
+                    <div class="action-btns-wrap">
+                        <button class="btn or" onclick="go('support')"><i class="fa-solid fa-paper-plane"></i> Apply for Jan 2027 Intake</button>
+                        <button class="btn" onclick="go('home')"><i class="fa-solid fa-book-open"></i> Read More Articles</button>
+                    </div>
+                </section>
+            `;
+        }
 
-                        <div>
-                            <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">Article Content</label>
-                            <div class="editor-tb">
-                                <button type="button" class="tb-btn" onclick="execCmd('bold')"><i class="fa-solid fa-bold"></i></button>
-                                <button type="button" class="tb-btn" onclick="execCmd('italic')"><i class="fa-solid fa-italic"></i></button>
-                                <button type="button" class="tb-btn" onclick="execCmd('underline')"><i class="fa-solid fa-underline"></i></button>
-                                <button type="button" class="tb-btn" onclick="execCmd('formatBlock', 'h2')">H2</button>
-                                <button type="button" class="tb-btn" onclick="insertCallout()"><i class="fa-solid fa-quote-left"></i> Callout Box</button>
-                                <button type="button" class="tb-btn" onclick="applyHighlight('hl-yellow')">🟨 Highlight</button>
-                                <button type="button" class="tb-btn" onclick="applyHighlight('hl-orange')">🟧 Highlight</button>
-                                <button type="button" class="tb-btn" onclick="applyHighlight('hl-green')">🟩 Highlight</button>
-                            </div>
-                            <div id="editor" class="editor-box" contenteditable="true">
-                                <p>Write your detailed article guide here...</p>
-                            </div>
-                        </div>
+        function renderSupportHTML() {
+            return `
+                <section class="sec" style="max-width: 680px;">
+                    <div class="lbl"><i class="fa-solid fa-headset"></i> Academic Advisory</div>
+                    <h1 class="big">Request Free Consultation <i>&amp; Assistance</i></h1>
+                    <p style="color:var(--mut); margin-bottom:24px;">Fill out the form below and an EzAssign Academic &amp; Admission Counselor will reach out to you within 24 hours.</p>
 
-                        <button type="submit" class="btn or wide" style="margin-top: 12px;"><i class="fa-solid fa-paper-plane"></i> Publish Now</button>
+                    <form onsubmit="event.preventDefault(); showToast('Request submitted successfully!'); go('home');">
+                        <input class="in" type="text" placeholder="Full Name" required />
+                        <input class="in" type="email" placeholder="Email Address" required />
+                        <input class="in" type="tel" placeholder="Phone Number / WhatsApp" required />
+                        <select class="in" style="cursor:pointer;">
+                            <option>Select Service Interested In</option>
+                            <option>UK January 2027 Admission Guidance</option>
+                            <option>SOP &amp; LOR Drafting Support</option>
+                            <option>Student Visa &amp; Financial Documentation</option>
+                            <option>Coursework &amp; Assignment Assistance</option>
+                        </select>
+                        <textarea class="in" rows="4" placeholder="How can EzAssign assist you?"></textarea>
+                        <button class="btn or wide" type="submit">Submit Consultation Request</button>
                     </form>
                 </section>
             `;
-
-            document.getElementById('app').innerHTML = html;
         }
 
-        // Editor Helpers
-        function execCmd(command, value = null) {
-            document.execCommand(command, false, value);
-        }
+        function renderPublishHTML() {
+            return `
+                <section class="sec" style="max-width: 780px;">
+                    <div class="lbl"><i class="fa-solid fa-pen-to-square"></i> Author Desk</div>
+                    <h1 class="big">Publish New Article <i>to EzAssign Blog</i></h1>
 
-        function insertCallout() {
-            const html = `<div class="call"><strong>Important Notice:</strong> Add callout details here.</div><p></p>`;
-            document.execCommand('insertHTML', false, html);
-        }
+                    <form onsubmit="publishNewArticle(event)">
+                        <input class="in" id="new-title" type="text" placeholder="Article Title..." required />
+                        <div style="display:flex; gap:12px;">
+                            <select class="in" id="new-cat" style="flex:1;">
+                                <option>Admissions</option>
+                                <option>Universities</option>
+                                <option>Visa</option>
+                                <option>Careers</option>
+                                <option>Finance</option>
+                            </select>
+                            <input class="in" id="new-readtime" type="text" placeholder="Read time (e.g. 5 min read)" style="flex:1;" />
+                        </div>
+                        <input class="in" id="new-author" type="text" placeholder="Author Name" />
+                        
+                        <!-- Cover Page Image Section with Gallery Upload Option -->
+                        <div style="margin-bottom: 16px;">
+                            <label style="display:block; font-weight:700; margin-bottom:6px; font-size:14px;">Cover Page / Header Image:</label>
+                            <div style="display:flex; gap:8px; align-items:center;">
+                                <input class="in" id="new-img" type="url" placeholder="Cover Image URL or attach from gallery..." style="margin-bottom:0; flex:1;" />
+                                <button type="button" class="btn" onclick="attachCoverPhoto()"><i class="fa-solid fa-image"></i> Choose Photo</button>
+                            </div>
+                            <div id="cover-preview" style="display:none; height:120px; border-radius:12px; margin-top:10px; background-size:cover; background-position:center;"></div>
+                        </div>
 
-        function applyHighlight(className) {
-            const selection = window.getSelection();
-            if (!selection.rangeCount || selection.isCollapsed) return;
+                        <textarea class="in" id="new-desc" rows="2" placeholder="Short summary description..." required></textarea>
 
-            const range = selection.getRangeAt(0);
-            const mark = document.createElement('mark');
-            mark.className = className;
-            mark.appendChild(range.extractContents());
-            range.insertNode(mark);
-        }
+                        <label style="display:block; font-weight:700; margin:16px 0 8px; font-size:14px;">Article Body &amp; Content Editor:</label>
+                        
+                        <!-- Rich Text Toolbar with Attach Photo from Gallery -->
+                        <div class="editor-tb">
+                            <button type="button" class="tb-btn" onclick="execEditorCmd('bold')" title="Bold"><b>B</b></button>
+                            <button type="button" class="tb-btn" onclick="execEditorCmd('italic')" title="Italic"><i>I</i></button>
+                            <button type="button" class="tb-btn" onclick="execEditorCmd('formatBlock', 'h2')"><b>H2</b></button>
+                            <button type="button" class="tb-btn" onclick="execEditorCmd('formatBlock', 'p')">Paragraph</button>
+                            <button type="button" class="tb-btn" onclick="execEditorCmd('insertUnorderedList')"><i class="fa-solid fa-list-ul"></i> List</button>
+                            <button type="button" class="tb-btn" onclick="execEditorCmd('hiliteColor', '#fef08a')">💛 Highlight</button>
+                            <button type="button" class="tb-btn" onclick="attachPhotoFromGallery()"><i class="fa-solid fa-camera"></i> Attach Body Photo</button>
+                        </div>
 
-        function handleFileUpload(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    uploadedImageData = evt.target.result;
-                    document.getElementById('p-img').value = '';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
+                        <!-- Editable Content Box -->
+                        <div class="editor-box" id="new-content" contenteditable="true">
+                            <p>Write your detailed article content here. Use the buttons above to format or attach photos from your device gallery.</p>
+                        </div>
 
-        function clearFileUpload() {
-            document.getElementById('p-file').value = '';
-            uploadedImageData = null;
-        }
-
-        function handlePublish(e) {
-            e.preventDefault();
-            const title = document.getElementById('p-title').value.trim();
-            const category = document.getElementById('p-cat').value;
-            const author = document.getElementById('p-author').value.trim();
-            const desc = document.getElementById('p-desc').value.trim();
-            let imgUrl = document.getElementById('p-img').value.trim();
-
-            if (uploadedImageData) {
-                imgUrl = uploadedImageData;
-            } else if (!imgUrl) {
-                imgUrl = 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1200&auto=format&fit=crop';
-            }
-
-            const content = document.getElementById('editor').innerHTML;
-            const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || ('post-' + Date.now());
-
-            const newPost = {
-                id,
-                title,
-                category,
-                author,
-                date: 'Just Now',
-                timestamp: Date.now(),
-                readTime: '4 min read',
-                isPinned: false,
-                likes: 0,
-                img: imgUrl,
-                desc,
-                content
-            };
-
-            articles.unshift(newPost);
-            saveArticlesToStorage();
-            go(id);
+                        <button class="btn or wide" type="submit" style="margin-top: 24px;">Publish Article Now</button>
+                    </form>
+                </section>
+            `;
         }
 
         // Initialize Application
-        window.onload = function() {
-            renderHome();
-        };
+        render();
     </script>
 </body>
 </html>
